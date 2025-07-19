@@ -23,7 +23,7 @@ const VisualDiary: React.FC = () => {
       id: 1,
       title: "The Beginning",
       date: "January 2018",
-      content: "Every great story has a beginning. Ours started with a simple sketch and a dream to create something timeless. The first design came to life on a quiet winter morning, inspired by the elegance of simplicity.",
+      content: "Every great story has a beginning. Ours started with a simple sketch and a dream to create something timeless.\n\nThe first design came to life on a quiet winter morning, inspired by the elegance of simplicity.\n\nWe knew from that moment that we were onto something special - a brand that would celebrate the art of thoughtful creation.",
       image: "story (1).jpg",
       theme: "light"
     },
@@ -31,15 +31,15 @@ const VisualDiary: React.FC = () => {
       id: 2,
       title: "Finding Our Voice",
       date: "March 2018",
-      content: "Months of experimentation led us to discover our unique aesthetic. We learned that true beauty lies not in complexity, but in the careful balance of form, function, and emotion.",
+      content: "Months of experimentation led us to discover our unique aesthetic.\n\nWe learned that true beauty lies not in complexity, but in the careful balance of form, function, and emotion.\n\nEach prototype taught us something new about our vision and values.",
       image: "story (2).jpg",
-      theme: "dark"
+      theme: "light"
     },
     {
       id: 3,
       title: "The First Collection",
       date: "September 2018",
-      content: "Our debut collection was more than products—it was a statement. Each piece told a story of craftsmanship, passion, and the belief that luxury should be accessible to those who appreciate true artistry.",
+      content: "Our debut collection was more than products—it was a statement.\n\nEach piece told a story of craftsmanship, passion, and the belief that luxury should be accessible to those who appreciate true artistry.\n\nThe response was overwhelming and humbling.",
       image: "story (3).jpg",
       theme: "light"
     },
@@ -47,15 +47,15 @@ const VisualDiary: React.FC = () => {
       id: 4,
       title: "Growing Community",
       date: "June 2019",
-      content: "What started as a small venture grew into a community of like-minded individuals who shared our vision. Every customer became part of our story, adding their own chapter to our journey.",
+      content: "What started as a small venture grew into a community of like-minded individuals who shared our vision.\n\nEvery customer became part of our story, adding their own chapter to our journey.\n\nWe realized we weren't just selling products - we were building relationships.",
       image: "story (4).jpg",
-      theme: "dark"
+      theme: "light"
     },
     {
       id: 5,
       title: "Innovation & Tradition",
       date: "December 2020",
-      content: "The challenge was to honor traditional craftsmanship while embracing modern innovation. We found the perfect balance, creating pieces that respect the past while looking toward the future.",
+      content: "The challenge was to honor traditional craftsmanship while embracing modern innovation.\n\nWe found the perfect balance, creating pieces that respect the past while looking toward the future.\n\nThis harmony became our signature approach.",
       image: "story (5).jpg",
       theme: "light"
     },
@@ -63,9 +63,9 @@ const VisualDiary: React.FC = () => {
       id: 6,
       title: "Looking Forward",
       date: "Present Day",
-      content: "Today, we continue to write our story. Each new design, each satisfied customer, each moment of inspiration adds another page to our ever-growing diary of creativity and passion.",
+      content: "Today, we continue to write our story.\n\nEach new design, each satisfied customer, each moment of inspiration adds another page to our ever-growing diary of creativity and passion.\n\nThe best is yet to come.",
       image: "story(6).jpg",
-      theme: "dark"
+      theme: "light"
     }
   ];
 
@@ -126,24 +126,8 @@ const VisualDiary: React.FC = () => {
     }
   };
 
-  // Click handling for page navigation
-  const handlePageClick = (e: React.MouseEvent) => {
-    if (diaryRef.current) {
-      const rect = diaryRef.current.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const pageWidth = rect.width;
-      
-      // Click on right half to go forward, left half to go back
-      if (clickX > pageWidth / 2) {
-        nextPage();
-      } else {
-        prevPage();
-      }
-    }
-  };
-
   return (
-    <section className="py-12 md:py-20 bg-gradient-to-br from-amber-50 to-orange-50">
+    <section className="py-12 md:py-20 bg-gradient-to-br from-amber-50 to-orange-50 diary-section">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -171,123 +155,160 @@ const VisualDiary: React.FC = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="max-w-6xl mx-auto"
+          className="max-w-7xl mx-auto"
         >
-          {/* Book Spine and Shadow */}
-          <div className="relative">
-            <div className="absolute -left-2 top-4 bottom-4 w-4 bg-gradient-to-r from-maroon-800 to-maroon-700 rounded-l-lg shadow-lg hidden md:block" />
+          {/* Book with Realistic Diary Layout */}
+          <div className="relative diary-book">
+            {/* Book Shadow */}
+            <div className="absolute inset-0 bg-black/10 rounded-lg transform translate-x-2 translate-y-2 blur-sm" />
             
-            {/* Main Book */}
+            {/* Main Diary */}
             <div 
               ref={diaryRef}
-              className="relative bg-white rounded-lg md:rounded-r-lg shadow-2xl overflow-hidden cursor-pointer"
-              onClick={handlePageClick}
+              className="relative bg-white rounded-lg shadow-2xl overflow-hidden diary-container"
               onTouchStart={onTouchStart}
               onTouchMove={onTouchMove}
               onTouchEnd={onTouchEnd}
-              style={{ aspectRatio: '16/10' }}
             >
+              {/* Diary Binding */}
+              <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-maroon-800 to-maroon-700 diary-binding">
+                {/* Spiral holes */}
+                <div className="flex flex-col justify-evenly h-full py-4">
+                  {Array.from({ length: 12 }).map((_, i) => (
+                    <div key={i} className="w-3 h-3 bg-black/20 rounded-full mx-auto" />
+                  ))}
+                </div>
+              </div>
+
               {/* Page Content */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentPage}
-                  initial={{ 
-                    rotateY: isFlipping ? -90 : 0,
-                    opacity: isFlipping ? 0 : 1 
-                  }}
-                  animate={{ 
-                    rotateY: 0,
-                    opacity: 1 
-                  }}
-                  exit={{ 
-                    rotateY: 90,
-                    opacity: 0 
-                  }}
-                  transition={{ 
-                    duration: 0.6,
-                    ease: "easeInOut"
-                  }}
-                  className={`absolute inset-0 ${
-                    diaryPages[currentPage].theme === 'dark' 
-                      ? 'bg-gradient-to-br from-gray-800 to-gray-900 text-white' 
-                      : 'bg-gradient-to-br from-white to-gray-50 text-gray-900'
-                  }`}
-                  style={{ 
-                    transformStyle: 'preserve-3d',
-                    backfaceVisibility: 'hidden'
-                  }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="ml-8 min-h-[600px] md:min-h-[700px]"
                 >
                   <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
-                    {/* Image Side */}
-                    <div className="relative overflow-hidden lg:order-1">
-                      <img
-                        src={diaryPages[currentPage].image}
-                        alt={diaryPages[currentPage].title}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                      <div className={`absolute inset-0 ${
-                        diaryPages[currentPage].theme === 'dark' 
-                          ? 'bg-black/20' 
-                          : 'bg-white/10'
-                      }`} />
-                    </div>
+                    {/* Left Page - Visual Content */}
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.6, delay: 0.2 }}
+                      className="relative p-6 md:p-8 lg:p-12 bg-paper-texture diary-left-page"
+                    >
+                      {/* Paper texture overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-amber-50/50 to-orange-50/30 pointer-events-none" />
+                      
+                      {/* Photo with realistic attachment */}
+                      <div className="relative z-10">
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
+                          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                          transition={{ duration: 0.8, delay: 0.4 }}
+                          className="relative photo-container"
+                        >
+                          {/* Photo corners/tape */}
+                          <div className="absolute -top-2 -left-2 w-6 h-6 bg-yellow-100 opacity-80 transform rotate-45 z-20 photo-tape" />
+                          <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-100 opacity-80 transform rotate-45 z-20 photo-tape" />
+                          <div className="absolute -bottom-2 -left-2 w-6 h-6 bg-yellow-100 opacity-80 transform rotate-45 z-20 photo-tape" />
+                          <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-yellow-100 opacity-80 transform rotate-45 z-20 photo-tape" />
+                          
+                          {/* Main photo */}
+                          <div className="relative overflow-hidden rounded-sm shadow-lg photo-frame">
+                            <img
+                              src={diaryPages[currentPage].image}
+                              alt={diaryPages[currentPage].title}
+                              className="w-full h-64 md:h-80 lg:h-96 object-cover"
+                              loading="lazy"
+                            />
+                            {/* Photo border */}
+                            <div className="absolute inset-0 border-4 border-white shadow-inner" />
+                          </div>
+                        </motion.div>
 
-                    {/* Content Side */}
-                    <div className="p-6 md:p-8 lg:p-12 flex flex-col justify-center lg:order-2">
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
-                      >
-                        <div className={`text-sm md:text-base font-medium mb-3 ${
-                          diaryPages[currentPage].theme === 'dark' 
-                            ? 'text-amber-300' 
-                            : 'text-maroon-600'
-                        }`}>
+                        {/* Handwritten-style date */}
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, delay: 0.8 }}
+                          className="mt-6 text-maroon-600 font-handwriting text-lg md:text-xl transform -rotate-1"
+                        >
                           {diaryPages[currentPage].date}
-                        </div>
-                        
-                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-playfair font-bold mb-4 md:mb-6">
+                        </motion.div>
+
+                        {/* Decorative elements */}
+                        <div className="absolute top-4 right-4 w-8 h-8 border-2 border-maroon-300 rounded-full opacity-30" />
+                        <div className="absolute bottom-8 left-4 w-4 h-4 bg-maroon-200 rounded-full opacity-40" />
+                      </div>
+                    </motion.div>
+
+                    {/* Right Page - Lined Paper with Text */}
+                    <motion.div
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.6, delay: 0.4 }}
+                      className="relative p-6 md:p-8 lg:p-12 diary-right-page lined-paper"
+                    >
+                      {/* Lined paper background */}
+                      <div className="absolute inset-0 lined-paper-bg" />
+                      
+                      {/* Margin line */}
+                      <div className="absolute left-16 top-0 bottom-0 w-0.5 bg-red-300 opacity-60" />
+
+                      {/* Content */}
+                      <div className="relative z-10 pt-8">
+                        <motion.h3
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, delay: 0.6 }}
+                          className="text-2xl md:text-3xl font-handwriting text-gray-800 mb-6 leading-relaxed"
+                        >
                           {diaryPages[currentPage].title}
-                        </h3>
+                        </motion.h3>
                         
-                        <p className={`text-base md:text-lg leading-relaxed mb-6 md:mb-8 ${
-                          diaryPages[currentPage].theme === 'dark' 
-                            ? 'text-gray-300' 
-                            : 'text-gray-700'
-                        }`}>
-                          {diaryPages[currentPage].content}
-                        </p>
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6, delay: 0.8 }}
+                          className="space-y-4"
+                        >
+                          {diaryPages[currentPage].content.split('\n\n').map((paragraph, index) => (
+                            <p
+                              key={index}
+                              className="text-gray-700 leading-relaxed font-handwriting text-base md:text-lg diary-text"
+                              style={{ lineHeight: '2rem' }}
+                            >
+                              {paragraph}
+                            </p>
+                          ))}
+                        </motion.div>
 
-                        {/* Page Number */}
-                        <div className={`text-sm font-medium ${
-                          diaryPages[currentPage].theme === 'dark' 
-                            ? 'text-gray-400' 
-                            : 'text-gray-500'
-                        }`}>
-                          Page {currentPage + 1} of {diaryPages.length}
-                        </div>
-                      </motion.div>
-                    </div>
-                  </div>
-
-                  {/* Navigation Hints */}
-                  <div className="absolute top-1/2 left-4 transform -translate-y-1/2 opacity-30 hover:opacity-60 transition-opacity duration-200 hidden md:block">
-                    <ChevronLeft size={24} className={
-                      diaryPages[currentPage].theme === 'dark' ? 'text-white' : 'text-gray-600'
-                    } />
-                  </div>
-                  <div className="absolute top-1/2 right-4 transform -translate-y-1/2 opacity-30 hover:opacity-60 transition-opacity duration-200 hidden md:block">
-                    <ChevronRight size={24} className={
-                      diaryPages[currentPage].theme === 'dark' ? 'text-white' : 'text-gray-600'
-                    } />
+                        {/* Page number */}
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.6, delay: 1 }}
+                          className="absolute bottom-6 right-6 text-sm text-gray-500 font-handwriting"
+                        >
+                          {currentPage + 1}
+                        </motion.div>
+                      </div>
+                    </motion.div>
                   </div>
                 </motion.div>
               </AnimatePresence>
 
-              {/* Page Binding Effect */}
-              <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-gray-300 to-gray-400 opacity-50" />
+              {/* Click areas for navigation */}
+              <div 
+                className="absolute left-8 top-0 bottom-0 w-1/2 cursor-pointer z-30"
+                onClick={prevPage}
+              />
+              <div 
+                className="absolute right-0 top-0 bottom-0 w-1/2 cursor-pointer z-30"
+                onClick={nextPage}
+              />
             </div>
           </div>
 
@@ -352,9 +373,9 @@ const VisualDiary: React.FC = () => {
             className="text-center mt-6 md:hidden"
           >
             <p className="text-sm text-gray-600">
-              Tap the book or swipe to turn pages
+              Tap left or right side of the diary to navigate • Swipe to turn pages
             </p>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
