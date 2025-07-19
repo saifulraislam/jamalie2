@@ -78,6 +78,41 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  /* Diary page flip animations */
+  .page-flip-enter {
+    transform: rotateY(-90deg);
+    opacity: 0;
+  }
+
+  .page-flip-enter-active {
+    transform: rotateY(0deg);
+    opacity: 1;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+  }
+
+  .page-flip-exit {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+
+  .page-flip-exit-active {
+    transform: rotateY(90deg);
+    opacity: 0;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+  }
+
+  /* 3D perspective for book effect */
+  .book-container {
+    perspective: 1000px;
+    perspective-origin: center center;
+  }
+
+  /* Enhanced touch targets for mobile */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
 
 /* Custom scrollbar */
