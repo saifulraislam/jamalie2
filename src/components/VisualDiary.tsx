@@ -376,7 +376,6 @@ const VisualDiary: React.FC = () => {
               Tap left or right side of the diary to navigate • Swipe to turn pages
             </p>
           </motion.div>
-        </div>
       </div>
     </section>
   );
