@@ -12,7 +12,6 @@ const HomePage: React.FC = () => {
       <ProductShowcase />
       <ImageSlider />
       <Gallery />
-      <VisualDiary />
       <QuoteSection />
     </>
   );
