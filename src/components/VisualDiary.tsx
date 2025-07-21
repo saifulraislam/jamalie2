@@ -365,17 +365,6 @@ const VisualDiary: React.FC = () => {
             </motion.button>
           </div>
 
-          {/* Mobile Instructions */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1 }}
-            className="text-center mt-6 md:hidden"
-          >
-            <p className="text-sm text-gray-600">
-              Tap left or right side of the diary to navigate • Swipe to turn pages
-            </p>
-          </motion.div>
         </div>
       </div>
     </section>
