@@ -375,7 +375,6 @@ const VisualDiary: React.FC = () => {
             <p className="text-sm text-gray-600">
               Tap left or right side of the diary to navigate • Swipe to turn pages
             </p>
-          </div>
         </motion.div>
       </div>
     </section>
