@@ -3,7 +3,6 @@ import Hero from '../components/Hero';
 import ProductShowcase from '../components/ProductShowcase';
 import ImageSlider from '../components/ImageSlider';
 import Gallery from '../components/Gallery';
-import VisualDiary from '../components/VisualDiary';
 import QuoteSection from '../components/QuoteSection';
 
 const HomePage: React.FC = () => {
