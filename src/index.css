@@ -207,3 +207,99 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Diary-specific styles */
+.diary-spread {
+  background: linear-gradient(
+    to right,
+    #FDF9F6 0%,
+    #FDF9F6 48%,
+    #6E1224 48%,
+    #6E1224 52%,
+    #FEFCFA 52%,
+    #FEFCFA 100%
+  );
+}
+
+.diary-spread::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+/* Paper texture animation */
+@keyframes paperTexture {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.3; }
+}
+
+.paper-texture {
+  animation: paperTexture 4s ease-in-out infinite;
+}
+
+/* Polaroid hover effect */
+.polaroid-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.polaroid-hover:hover {
+  transform: translateY(-4px) rotate(2deg) scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Handwriting effect */
+.handwriting {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 400;
+}
+
+/* Diary binding effect */
+.diary-binding {
+  background: linear-gradient(
+    to bottom,
+    #6E1224 0%,
+    #8B2635 50%,
+    #6E1224 100%
+  );
+  box-shadow: 
+    inset 2px 0 4px rgba(0, 0, 0, 0.2),
+    inset -2px 0 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Tape effect */
+.tape-effect {
+  background: linear-gradient(
+    135deg,
+    #F0E2D0 0%,
+    #EAD6CD 50%,
+    #E5D1C8 100%
+  );
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile swipe indicator */
+@media (max-width: 1023px) {
+  .swipe-indicator {
+    position: relative;
+  }
+  
+  .swipe-indicator::after {
+    content: '← Swipe →';
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: rgba(110, 18, 36, 0.6);
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+}
